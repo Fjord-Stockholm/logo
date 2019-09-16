@@ -1,0 +1,138 @@
+html {
+  padding: 0;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  font-family: sans-serif;
+}
+
+:root {
+  --elementsPressure: 0;
+  --transitionDuration: "1s";
+  --cubeSize: 250px;
+  --textColor: black;
+  --cloudCoverage: 50;
+  --hue: 0;
+  --saturate: 1;
+  --brightness: 1;
+}
+
+body {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  color: var(--textColor);
+  padding: 0;
+}
+
+/* Navigation */
+
+.nav {
+  display: inline-flex;
+  width: 100%;
+  z-index: 2;
+  transition: all 400ms ease;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+p {
+  margin-bottom: 2.8em;
+  opacity: 0.8;
+}
+
+button {
+  font-family: "San Francisco";
+  font-size: 16px;
+  vertical-align: middle;
+  background-color: #1c1c1c;
+  outline: none;
+  color: white;
+  padding: 8px 16px;
+  margin: 0;
+  cursor: pointer;
+  transition: opacity 400ms ease;
+  border: 2px solid #dbdbdb;
+  border-radius: 8px;
+  min-width: 94px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.secondary {
+  background-color: transparent;
+  color: var(--textColor);
+  margin-inline-end: 16px;
+}
+
+form {
+  text-align: center;
+  font-family: "San Francisco";
+}
+
+input {
+  width: 200px;
+  font-family: "San Francisco";
+  border: none;
+  border-bottom: 2px solid #dbdbdb;
+  background-color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  outline: none;
+  text-align: center;
+  -webkit-appearance: none;
+  color: var(--textColor);
+}
+
+/* Content */
+
+.pageWrapper {
+  display: inline-flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 500px;
+  height: 500px;
+  border-radius: 250px;
+  overflow: hidden;
+  transform: scale(0.8);
+  filter: saturate(var(--saturate)) brightness(var(--brightness));
+}
+
+#logo {
+  font-size: 40px;
+  z-index: 10000;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#logo span {
+  font-weight: 600;
+}
+
+.footer {
+  min-height: 10vh;
+}
+
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("../font/SF-Pro-Rounded-Regular.otf");
+}
