@@ -48,7 +48,7 @@ p {
 }
 
 button {
-  font-family: "San Francisco";
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   vertical-align: middle;
   background-color: #1c1c1c;
@@ -58,13 +58,14 @@ button {
   margin: 0;
   cursor: pointer;
   transition: opacity 400ms ease;
-  border: 2px solid #dbdbdb;
+  border: 1px solid #dbdbdb;
   border-radius: 8px;
-  min-width: 94px;
+  width: 140px;
+  transition: border 300ms ease;
 }
 
 button:hover {
-  opacity: 0.9;
+  border: 1px solid #1c1c1c;
 }
 
 button.secondary {
@@ -82,7 +83,7 @@ input {
   width: 200px;
   font-family: "San Francisco";
   border: none;
-  border-bottom: 2px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
   background-color: white;
   padding: 10px 16px;
   font-size: 16px;

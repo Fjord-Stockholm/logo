@@ -200,7 +200,7 @@ function drawSunPath() {
 
   var currentTime = map(now.getHours(), 0, 24, 0.5, 1);
 
-  //gradient.setAttribute("gradientTransform", "rotate(" + windDeg + ")");
+  gradient.setAttribute("gradientTransform", "rotate(" + windDeg + ")");
 
   if (nightTime) {
     middleColorStop.setAttributeNS(
@@ -300,7 +300,7 @@ function drawSunPath() {
     targets: mySVG,
     translateY: [0, windSpeed, 0],
     translateX: [0, map(windDeg, 0, 360, 0, 4), 0],
-    opacity: [1, 0.8, 1],
+    opacity: [1, 0.6, 1],
     duration: 1500,
     loop: true,
     direction: "alternate",
