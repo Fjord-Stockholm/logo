@@ -124,6 +124,7 @@ input {
 }
 
 #logo {
+  font-family: "Graphik", sans-serif;
   font-size: 40px;
   z-index: 10000;
   text-align: center;
@@ -133,6 +134,7 @@ input {
 
 #logo span {
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .footer {
@@ -144,4 +146,16 @@ input {
   font-family: "San Francisco";
   font-weight: 400;
   src: url("../font/SF-Pro-Rounded-Regular.otf");
+}
+
+@font-face {
+  font-family: "Graphik";
+  font-weight: 400;
+  src: url("../font/Graphik-Regular-Web.woff");
+}
+
+@font-face {
+  font-family: "Graphik";
+  font-weight: 600;
+  src: url("../font/Graphik-Semibold-Web.woff");
 }
