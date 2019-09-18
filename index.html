@@ -30,7 +30,7 @@
               <filter id="displacementFilter">
                 <feTurbulence
                   type="fractalNoise"
-                  baseFrequency="1 0.7"
+                  baseFrequency="0.1 0.1"
                   numOctaves="5"
                   seed="10"
                 >
@@ -46,10 +46,9 @@
                 <feDisplacementMap
                   in2="turbulence"
                   in="SourceGraphic"
-                  scale="1.2"
-                  xChannelSelector="A"
-                  yChannelSelector="A"
-                  yChannelSelector="A"
+                  scale="1"
+                  xChannelSelector="R"
+                  yChannelSelector="G"
                 ></feDisplacementMap>
               </filter>
 
