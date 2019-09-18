@@ -5,6 +5,7 @@ var startTime = new Date();
 var sunPosition;
 var windAnimation;
 var initialGradient;
+var nightTime;
 
 const map = (num, in_min, in_max, out_min, out_max) => {
   return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
@@ -25,7 +26,7 @@ var isSafari =
   navigator.userAgent.indexOf("FxiOS") == -1;
 
 if (isSafari) {
-  console.log("hello");
+  //
 } else {
   var svg = document.getElementById("mySVG");
   svg.setAttributeNS(null, "filter", "url(#displacementFilter)");
@@ -88,7 +89,6 @@ function getWeather() {
       response.json().then(function(data) {
         currentWeather = data;
         console.log("Made with love in Stockholm 🏰🇪🇺");
-        console.log(currentWeather);
 
         clouds = map(currentWeather.clouds.all, 0, 100, 0, 90);
         cloudCoverage = map(currentWeather.clouds.all, 0, 100, 0, 1);
@@ -141,15 +141,13 @@ function getSun() {
     now.getTime() < times.sunset.getTime() &&
     now.getTime() > times.sunrise.getTime()
   ) {
+    nightTime = false;
     document.body.style.backgroundColor = "white";
     container.style.backgroundColor = "white";
 
     document.documentElement.style.setProperty("--textColor", "black");
   } else {
-    // document.body.style.backgroundColor = "black";
-    // container.style.backgroundColor = "black";
-    // sunColor = chroma.scale(["#000", "#fff"]);
-    // document.documentElement.style.setProperty("--textColor", "white");
+    nightTime = true;
 
     document.body.style.backgroundColor = "white";
     container.style.backgroundColor = "white";
@@ -168,56 +166,58 @@ function drawSunPath() {
 
   // Define gradient
 
+  var turquiose = "#11D1C6";
   var green = "#39DD91";
-  var yellow = "#EFE011";
+  var darkPink = "#ED145B";
   var orange = "#FF7900";
-  var darkPink = "#EB330C";
 
-  var lightBLue = "#5877E8";
-  var darkBLue = "#15363F";
+  var blue = "#234CDF";
+  var midnightBlue = "15363F";
+  var ash = "#F0EDED";
 
   var gradient = document.getElementById("gradient");
 
   var startColorStop = document.getElementById("startColor");
-  // var middleColorStop = document.getElementById("middleColor");
+  var middleColorStop = document.getElementById("middleColor");
   var endColorStop = document.getElementById("endColor");
 
-  var startColor = chroma.scale([green, yellow, orange, darkPink]);
-  // var middleColor = chroma.scale(["#ACCCD8", "#F15722"]);
-  var endColor = chroma.scale([lightBLue, darkBLue]);
+  var startColor;
+
+  var currentTemperature = currentWeather.main.temp;
+
+  if (currentTemperature > -25 && currentTemperature < -12.5) {
+    startColor = turquiose;
+  } else if (currentTemperature >= -12.5 && currentTemperature < 0) {
+    startColor = green;
+  } else if (currentTemperature >= 0 && currentTemperature < 12.5) {
+    startColor = darkPink;
+  } else if (currentTemperature >= 12.5) {
+    startColor = orange;
+  }
+
+  var middleColor = chroma.scale([ash, blue]);
+  var middleColorNight = chroma.scale([ash, midnightBlue]);
 
   var currentTime = map(now.getHours(), 0, 24, 0.5, 1);
-  var currentTemperature = map(temperature, 0, 40, 0, 1);
 
-  gradient.setAttribute("gradientTransform", "rotate(" + windDeg * 0.1 + ")");
+  //gradient.setAttribute("gradientTransform", "rotate(" + windDeg + ")");
 
-  startColorStop.setAttributeNS(
-    null,
-    "stop-color",
-    startColor(currentTemperature).hex()
-  );
+  if (nightTime) {
+    middleColorStop.setAttributeNS(
+      null,
+      "stop-color",
+      middleColorNight(cloudCoverage).hex()
+    );
+  } else {
+    middleColorStop.setAttributeNS(
+      null,
+      "stop-color",
+      middleColor(cloudCoverage).hex()
+    );
+  }
 
-  // middleColorStop.setAttributeNS(
-  //   null,
-  //   "stop-color",
-  //   middleColor(currentTemperature).hex()
-  // );
-
-  // middleStop = (1 - cloudCoverage) / 2;
-
-  // middleColorStop.setAttributeNS(null, "offset", middleStop);
-
-  endColorStop.setAttributeNS(
-    null,
-    "stop-color",
-    endColor(cloudCoverage).hex()
-  );
-
-  endColorStop.setAttributeNS(null, "offset", 1 - cloudCoverage);
-
-  document.documentElement.style.setProperty("--saturate", visibility);
-  document.documentElement.style.setProperty("--brightness", currentTime);
-  //document.documentElement.style.setProperty("--hue", windDeg + "deg");
+  startColorStop.setAttributeNS(null, "stop-color", startColor);
+  endColorStop.setAttributeNS(null, "stop-color", startColor);
 
   var mySVGElement = document.getElementById("contentWrapper");
   mySVG = document.getElementById("mySVG").children;
