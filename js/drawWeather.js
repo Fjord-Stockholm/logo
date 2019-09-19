@@ -172,6 +172,7 @@ function drawSunPath() {
 
   var startColorStop = document.getElementById("startColor");
   var middleColorStop = document.getElementById("middleColor");
+  var middleColorStop2 = document.getElementById("middleColor2");
   var endColorStop = document.getElementById("endColor");
 
   var startColor;
@@ -183,9 +184,9 @@ function drawSunPath() {
   } else if (currentTemperature >= -12.5 && currentTemperature < 0) {
     startColor = green;
   } else if (currentTemperature >= 0 && currentTemperature < 12.5) {
-    startColor = darkPink;
-  } else if (currentTemperature >= 12.5) {
     startColor = orange;
+  } else if (currentTemperature >= 12.5) {
+    startColor = darkPink;
   }
 
   var middleColor = chroma.scale([blue, ash]);
@@ -201,8 +202,19 @@ function drawSunPath() {
       "stop-color",
       middleColorNight(cloudCoverage).hex()
     );
+
+    middleColorStop2.setAttributeNS(
+      null,
+      "stop-color",
+      middleColorNight(cloudCoverage).hex()
+    );
   } else {
     middleColorStop.setAttributeNS(
+      null,
+      "stop-color",
+      middleColor(cloudCoverage).hex()
+    );
+    middleColorStop2.setAttributeNS(
       null,
       "stop-color",
       middleColor(cloudCoverage).hex()
