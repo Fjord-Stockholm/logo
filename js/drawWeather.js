@@ -350,11 +350,11 @@ function animateThrough(elem) {
   if (isPlaying) {
     clearTimeout(timer);
     isPlaying = false;
-    elem.innerHTML = "􀊃 Play";
+    elem.innerHTML = "Play";
     windAnimation.start;
   } else {
     isPlaying = true;
-    elem.innerHTML = "􀊅 Pause";
+    elem.innerHTML = "Pause";
     windAnimation.stop;
 
     animate();
