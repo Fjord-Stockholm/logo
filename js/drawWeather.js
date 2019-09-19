@@ -29,7 +29,7 @@ if (isSafari) {
   //
 } else {
   var svg = document.getElementById("mySVG");
-  svg.setAttributeNS(null, "filter", "url(#displacementFilter)");
+  //svg.setAttributeNS(null, "filter", "url(#displacementFilter)");
 }
 
 // Define elements
