@@ -188,8 +188,8 @@ function drawSunPath() {
     startColor = orange;
   }
 
-  var middleColor = chroma.scale([ash, blue]);
-  var middleColorNight = chroma.scale([ash, midnightBlue]);
+  var middleColor = chroma.scale([blue, ash]);
+  var middleColorNight = chroma.scale([midnightBlue, ash]);
 
   var currentTime = map(now.getHours(), 0, 24, 0.5, 1);
 
