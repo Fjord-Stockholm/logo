@@ -114,12 +114,10 @@ function download() {
   //   return node.id !== "testText";
   // }
   domtoimage
-    .toJpeg(document.getElementById("container"), {
-      quality: 1.0
-    })
+    .toPng(document.getElementById("container"))
     .then(function(dataUrl) {
       var link = document.createElement("a");
-      link.download = "logo-" + now.getDate() + "-" + now.getMonth() + ".jpeg";
+      link.download = "logo-" + now.getDate() + "-" + now.getMonth() + ".png";
       link.href = dataUrl;
       link.click();
     });
@@ -142,15 +140,10 @@ function getSun() {
     now.getTime() > times.sunrise.getTime()
   ) {
     nightTime = false;
-    document.body.style.backgroundColor = "white";
-    container.style.backgroundColor = "white";
 
     document.documentElement.style.setProperty("--textColor", "black");
   } else {
     nightTime = true;
-
-    document.body.style.backgroundColor = "white";
-    container.style.backgroundColor = "white";
 
     document.documentElement.style.setProperty("--textColor", "black");
   }
