@@ -194,7 +194,7 @@ function drawSunPath() {
 
   var currentTime = map(now.getHours(), 0, 24, 0.5, 1);
 
-  gradient.setAttribute("gradientTransform", "rotate(" + windDeg + ")");
+  gradient.setAttribute("gradientTransform", "rotate(" + windDeg * 0.1 + ")");
 
   if (nightTime) {
     middleColorStop.setAttributeNS(

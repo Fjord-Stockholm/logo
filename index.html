@@ -27,36 +27,11 @@
             height="500px"
           >
             <defs>
-              <filter id="displacementFilter">
-                <feTurbulence
-                  type="fractalNoise"
-                  baseFrequency="0.1 0.1"
-                  numOctaves="5"
-                  seed="10"
-                >
-                  <animate
-                    attributeName="baseFrequency"
-                    from="1 0.7"
-                    to="0.7 1"
-                    dur="5s"
-                    repeatCount="indefinite"
-                  />
-                </feTurbulence>
-
-                <feDisplacementMap
-                  in2="turbulence"
-                  in="SourceGraphic"
-                  scale="1"
-                  xChannelSelector="R"
-                  yChannelSelector="G"
-                ></feDisplacementMap>
-              </filter>
-
-              <linearGradient id="gradient">
-                <stop id="startColor" offset="20%" stop-color="" />
-                <stop id="middleColor" offset="40%" stop-color="" />
-                <stop id="middleColor2" offset="60%" stop-color="" />
-                <stop id="endColor" offset="80%" stop-color="" />
+              <linearGradient gradientUnits="objectBoundingBox" id="gradient">
+                <stop id="startColor" offset="30%" stop-color="" />
+                <stop id="middleColor" offset="48%" stop-color="" />
+                <stop id="middleColor2" offset="52%" stop-color="" />
+                <stop id="endColor" offset="70%" stop-color="" />
               </linearGradient>
             </defs>
             <path></path>
