@@ -47,6 +47,7 @@ var lightHours;
 var sunColor;
 var cloudCoverage;
 var currentWeather;
+var currentTemperature;
 
 // Define colors
 
@@ -100,6 +101,68 @@ function getWeather() {
         visibility = map(currentWeather.visibility, 0, 10000, 0, 4);
         windDeg = map(currentWeather.wind.deg, 0, 360, 0, 360);
         windSpeed = map(currentWeather.wind.speed, 0, 14, 0.8, 5);
+        currentTemperature = currentWeather.main.temp;
+
+        drawSunPath();
+      });
+    })
+    .catch(function(err) {
+      console.log("Fetch Error :-S", err);
+    });
+}
+
+function timeMachineRequest(currentTime) {
+  var proxy = "https://cors-anywhere.herokuapp.com/";
+  var apiCall =
+    proxy +
+    "https://api.darksky.net/forecast/c0a8dd14159b4555b16c180f8af67f0c/" +
+    stockholmLat +
+    "," +
+    stockholmLong +
+    "," +
+    currentTime +
+    "?units=si";
+
+  fetch(apiCall, {
+    mode: "cors",
+    header: {
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
+    .then(function(response) {
+      if (response.status !== 200) {
+        console.log(
+          "Looks like there was a problem. Status Code: " + response.status
+        );
+        return;
+      }
+
+      response.json().then(function(data) {
+        currentWeather = data;
+
+        clouds = map(currentWeather.currently.cloudCover, 0, 1, 0, 90);
+        cloudCoverage = map(currentWeather.currently.cloudCover, 0, 1, 0, 1);
+        humidity = map(currentWeather.currently.humidity, 0, 1, 0, 50);
+        pressure = map(currentWeather.currently.pressure, 800, 1100, 10, 0);
+        temperature = map(currentWeather.currently.temp, -30, 55, 0, 40);
+        tempMax = map(
+          currentWeather.daily.data[0].temperatureMax,
+          -30,
+          55,
+          0,
+          4
+        );
+        tempMin = map(
+          currentWeather.daily.data[0].temperatureMin,
+          -30,
+          55,
+          0,
+          4
+        );
+        visibility = map(currentWeather.currently.visibility, 0, 10000, 0, 4);
+        windDeg = map(currentWeather.currently.windBearing, 0, 360, 0, 360);
+        windSpeed = map(currentWeather.currently.windSpeed, 0, 14, 0.8, 5);
+        currentTemperature = currentWeather.currently.temperature;
 
         drawSunPath();
       });
@@ -176,8 +239,6 @@ function drawSunPath() {
   var endColorStop = document.getElementById("endColor");
 
   var startColor;
-
-  var currentTemperature = currentWeather.main.temp;
 
   if (currentTemperature > -25 && currentTemperature < -12.5) {
     startColor = turquiose;
@@ -348,7 +409,9 @@ function updateWithDate() {
   var myDate = document.getElementById("myDate").value;
   var dateEntered = new Date(myDate);
   startTime = dateEntered;
-  drawSunPath();
+  var unix = Math.round(+new Date(myDate) / 1000);
+  timeMachineRequest(unix);
+  //drawSunPath();
 }
 
 function animateThrough(elem) {
