@@ -59,7 +59,6 @@ let apiKey = "ec6b462b9e2f481b5c7f4d112b811de1";
 let units = "&units=metric";
 let cors = "https://cors-anywhere.herokuapp.com/";
 let apiCall =
-  cors +
   "http://api.openweathermap.org/data/2.5/weather?id=" +
   cityID +
   "&APPID=" +
