@@ -57,7 +57,6 @@ var stockholmLong = 18.07109;
 let cityID = "2673730";
 let apiKey = "ec6b462b9e2f481b5c7f4d112b811de1";
 let units = "&units=metric";
-let cors = "http://corsproxy.nodester.com/?src=";
 let apiCall =
 	"https://api.openweathermap.org/data/2.5/weather?id=" +
 	cityID +
@@ -112,7 +111,6 @@ function getWeather() {
 }
 
 function timeMachineRequest(currentTime) {
-	var proxy = "https://cors-anywhere.herokuapp.com/";
 	var apiCall =
 		proxy +
 		"https://api.darksky.net/forecast/c0a8dd14159b4555b16c180f8af67f0c/" +
@@ -127,6 +125,7 @@ function timeMachineRequest(currentTime) {
 		mode: "cors",
 		header: {
 			"Access-Control-Allow-Origin": "*",
+			"Cache-Control": "no-store",
 		},
 	})
 		.then(function (response) {
