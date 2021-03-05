@@ -117,7 +117,7 @@ function timeMachineRequest(currentTime) {
 		"?units=si";
 
 	fetch(apiCall, {
-		mode: "no-cors",
+		mode: "cors",
 		header: {
 			"Access-Control-Allow-Origin": "*",
 			"Cache-Control": "no-store",
