@@ -108,7 +108,6 @@ function getWeather() {
 
 function timeMachineRequest(currentTime) {
 	var apiCall =
-		proxy +
 		"https://api.darksky.net/forecast/c0a8dd14159b4555b16c180f8af67f0c/" +
 		stockholmLat +
 		"," +
